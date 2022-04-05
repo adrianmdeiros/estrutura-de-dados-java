@@ -5,7 +5,7 @@ import ArvoreBinaria.Arvore;
 import ListaEncadeadaDupla.Lista;
 import java.io.IOException;
 
-public class main{
+public class App{
    
     public static void main(String[]args) throws IOException{
         
@@ -21,7 +21,7 @@ public class main{
         
         int valor = 0;
         String comandos = "";
-        
+                
         
         for(String entrada : args){
             if(entrada.matches("-?\\d+")){
@@ -34,7 +34,9 @@ public class main{
         
         switch (comandos) {
             case "arvoremostrar" -> arvore.mostrarArvore();
-            case "arvorebuscar" -> System.out.println("Resultado da busca: \n" + arvore.buscarElemento(valor));            
+            case "arvorebuscar" -> {
+                System.out.println("Elemento: " + arvore.buscarElemento(valor));  
+            }     
             case "arvoredeletar"-> {
                 arvore.removerElemento(valor);
                 arvore.mostrarArvore();
@@ -67,18 +69,5 @@ public class main{
             }
             default -> System.out.println("Comando incorreto. Tente novamente.");
         }
-        
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }

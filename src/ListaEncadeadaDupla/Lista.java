@@ -13,7 +13,7 @@ public class Lista {
         return tamanho;
     }
     public void init() throws IOException{
-        String caminho = "/entradas/dados.txt";
+        String caminho = ".\\dados.txt";
         List<String> dados = LeitorDeArquivo.lerArquivo(caminho);
         
         for (int i = 0; i < dados.size(); i++){

@@ -11,16 +11,16 @@ public class Arvore {
     }
     
     public void init() throws IOException{
-        String caminho = "/entradas/dados.txt";
+       String caminho = ".\\dados.txt";
         List<String> dados = LeitorDeArquivo.lerArquivo(caminho);
-       
+ 
         for (int i = 0; i < dados.size(); i++) {
-            inserirElemento(Integer.parseInt(dados.get(i)));        
+            inserirElemento(Integer.parseInt(dados.get(i)));
         }
     }
     
 
-    public void inserirElemento(long valor){
+    public void inserirElemento(int valor){
         No novo = new No();
         novo.elemento = valor;
         novo.direita = null;
@@ -51,26 +51,32 @@ public class Arvore {
         } 
     } 
 
-    public No buscarElemento(long valor) {
-        if (raiz == null) 
-            return null; 
+    public int buscarElemento(int valor) {
+        if (raiz == null){
+            System.out.println("Raiz nula");
+            return 0;
+        }  
         No atual = raiz;  
         while (atual.elemento != valor) { 
-            if(valor < atual.elemento ) 
-                atual = atual.esquerda; 
-            else 
-                atual = atual.direita; 
-            if (atual == null)
+            if(valor < atual.elemento ){
+                atual = atual.esquerda;
+            } else {
+                atual = atual.direita;
+            }
+            if (atual == null){
                 System.out.println("Elemento não encontrado.");
-                return null; 
+                return 0;
+            }
         }
-        return atual;
+        return  atual.elemento;
     }
     
     
     public boolean removerElemento(long valor) {
-        if (raiz == null)
-            return false; 
+        if (raiz == null){
+             return false;
+        }
+            
 
         No atual = raiz;
         No pai = raiz;
@@ -86,28 +92,37 @@ public class Arvore {
                 atual = atual.direita; 
                 filho_esquerda = false; 
               }
-              if (atual == null)
+              if (atual == null){
                     System.out.println("Elemento não encontrado");
-                return false; 
+                    return false;
+              }
             } 
             // Se não possui nenhum filho (folha)
             if (atual.esquerda == null && atual.direita == null) {
-              if (atual == raiz )
-                  raiz = null; 
-              else if (filho_esquerda)
-                pai.esquerda = null; 
-              else
-                pai.direita = null; 
+              if (atual == raiz ){
+                  raiz = null;
+              }
+                   
+              else if (filho_esquerda){
+                  pai.esquerda = null;
+              }
+              else{
+                  pai.direita = null;
+              }      
             }
 
             // Se é pai e nao possui um filho a direita, substitui pela subarvore a direita
             else if (atual.direita == null) {
-                if (atual == raiz)
-                   raiz = atual.esquerda; 
-                else if (filho_esquerda)
-                   pai.esquerda = atual.esquerda; 
-                else
-                   pai.direita = atual.esquerda; 
+                if (atual == raiz){
+                    raiz = atual.esquerda;
+                }
+                    
+                else if (filho_esquerda){
+                    pai.esquerda = atual.esquerda; 
+                }
+                else{
+                    pai.direita = atual.esquerda;
+                }         
             }
 
             // Se é pai e nao possui um filho a esquerda, substitui pela subarvore a esquerda   
@@ -123,12 +138,17 @@ public class Arvore {
             // Se possui mais de um filho, se for um avô ou outro grau maior de parentesco
             else {
               No sucessor = noSucessor(atual);
-                if (atual == raiz)
+                if (atual == raiz){
                     raiz = sucessor; 
-                else if(filho_esquerda)
+                }
+                    
+                else if(filho_esquerda){
                     pai.esquerda = sucessor;
-                else 
-                    pai.direita = sucessor; 
+                }
+                    
+                else{
+                    pai.direita = sucessor;
+                }
                 sucessor.esquerda = atual.esquerda; 
             }
         return true;
@@ -206,13 +226,13 @@ public class Arvore {
         System.out.println("__________ÁRVORE__________\n");
         System.out.println("\n\nEm ordem:\n");
         emOrdem(raiz);
-        System.out.println("\n\nPre-ordem:\n");
-        preOrdem(raiz);
-        System.out.println("\n\nPos-ordem:\n");
-        posOrdem(raiz);
-        System.out.println("\n\nAltura:\n" + alturaArvore(raiz));
-        System.out.println("\n\nFolhas:\n" + quantidadeFolhas(raiz));
-        System.out.println("\n\nNos:\n" + quantidadeNos(raiz));
+        //System.out.println("\n\nPre-ordem:\n");
+        //preOrdem(raiz);
+        //System.out.println("\n\nPos-ordem:\n");
+        //posOrdem(raiz);
+       //System.out.println("\n\nAltura:\n" + alturaArvore(raiz));
+        //System.out.println("\n\nFolhas:\n" + quantidadeFolhas(raiz));
+        //System.out.println("\n\nNos:\n" + quantidadeNos(raiz));
     }
     
 }
