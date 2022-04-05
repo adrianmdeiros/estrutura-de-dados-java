@@ -17,7 +17,6 @@ public class Arvore {
         for (int i = 0; i < dados.size(); i++) {
             inserirElemento(Integer.parseInt(dados.get(i)));        
         }
-        mostrarArvore();
     }
     
 
@@ -62,14 +61,16 @@ public class Arvore {
             else 
                 atual = atual.direita; 
             if (atual == null)
+                System.out.println("Elemento não encontrado.");
                 return null; 
         }
-        return atual; 
+        return atual;
     }
     
     
     public boolean removerElemento(long valor) {
-        if (raiz == null) return false; 
+        if (raiz == null)
+            return false; 
 
         No atual = raiz;
         No pai = raiz;
@@ -86,6 +87,7 @@ public class Arvore {
                 filho_esquerda = false; 
               }
               if (atual == null)
+                    System.out.println("Elemento não encontrado");
                 return false; 
             } 
             // Se não possui nenhum filho (folha)
@@ -201,7 +203,8 @@ public class Arvore {
     }
     
     public void mostrarArvore(){
-        System.out.println("Em ordem:\n");
+        System.out.println("__________ÁRVORE__________\n");
+        System.out.println("\n\nEm ordem:\n");
         emOrdem(raiz);
         System.out.println("\n\nPre-ordem:\n");
         preOrdem(raiz);

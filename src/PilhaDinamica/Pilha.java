@@ -1,10 +1,25 @@
 package PilhaDinamica;
 
+import Util.LeitorDeArquivo;
+import java.io.IOException;
+import java.util.List;
+
 
 public class Pilha {
     No topo;
     int tamanho;
     
+    public void init() throws IOException{
+        String caminho = "/entradas/dados.txt";
+        List<String> dados = LeitorDeArquivo.lerArquivo(caminho);
+        
+        for (int i = 0; i < dados.size(); i++){
+            inserirPilha(dados.get(i));
+        }
+    }
+    
+    
+  
     public int tamanho(){
         return tamanho;
     }
@@ -31,7 +46,7 @@ public class Pilha {
     }
     
     
-    public String consultarTopo(){
+    public String buscarTopo(){
         String dados = null;
         if(!pilhaVazia()){
             dados = topo.dados;
@@ -39,12 +54,13 @@ public class Pilha {
        return dados;
     }
     
-     public void mostraPilha(){
-        String pilha = "Quantidade de elementos: " + tamanho + "\n";
+     public void mostrarPilha(){
+        System.out.println("__________PILHA__________\n");
+        String pilha = "\nQuantidade de elementos: " + tamanho + "\n";
         if(!pilhaVazia()){
             No local = topo;
               while(local != null){
-              pilha += local.dados + " ";
+              pilha += local.dados + " \n";
               local = local.proximo;
             }
         }

@@ -1,4 +1,7 @@
 package ListaEncadeadaDupla;
+import Util.LeitorDeArquivo;
+import java.io.IOException;
+import java.util.List;
 
 
 public class Lista {
@@ -9,14 +12,20 @@ public class Lista {
     public int tamanho(){
         return tamanho;
     }
-    
+    public void init() throws IOException{
+        String caminho = "/entradas/dados.txt";
+        List<String> dados = LeitorDeArquivo.lerArquivo(caminho);
+        
+        for (int i = 0; i < dados.size(); i++){
+            inserirFim(dados.get(i));
+        }
+    }
     
     public boolean listaVazia(){
         return inicio == null;
     }
     
-    
-    
+   
     public void inserirInicio(String dados){
         No no = new No();
         no.dados = dados;
@@ -105,6 +114,7 @@ public class Lista {
    
    public String removerMeio(int indice){
        if(indice < 0 || indice >= tamanho || inicio == null){
+           System.out.println("Não é possível realizar essa operação.");
            return null;
        } else if(indice == 0){
            return removerInicio();
@@ -121,7 +131,7 @@ public class Lista {
        return local.dados;
    }
    
-   /*public void inserirOrdenado(String dados){
+   /*public void inserirOrdenado(Object dados){
        No no = new No();
        no.dados = dados;
        if(inicio == null){
@@ -164,7 +174,8 @@ public class Lista {
    
    
    public void mostrarLista(){
-      String lista = "Quantidade de elementos: " + tamanho + "\n";
+      System.out.println("__________LISTA__________\n");
+      String lista = "\n\nQuantidade de elementos: " + tamanho + "\n";
       if(!listaVazia()){ 
         No local = inicio;
         while(local != null){
